@@ -1,0 +1,53 @@
+Found 350 samples in: Adipose - Subcutaneous
+Found 227 samples in: Adipose - Visceral (Omentum)
+Found 145 samples in: Adrenal Gland
+Found 224 samples in: Artery - Aorta
+Found 133 samples in: Artery - Coronary
+Found 332 samples in: Artery - Tibial
+Found  11 samples in: Bladder
+Found  72 samples in: Brain - Amygdala
+Found  84 samples in: Brain - Anterior cingulate cortex (BA24)
+Found 117 samples in: Brain - Caudate (basal ganglia)
+Found 105 samples in: Brain - Cerebellar Hemisphere
+Found 125 samples in: Brain - Cerebellum
+Found 114 samples in: Brain - Cortex
+Found 108 samples in: Brain - Frontal Cortex (BA9)
+Found  94 samples in: Brain - Hippocampus
+Found  96 samples in: Brain - Hypothalamus
+Found 113 samples in: Brain - Nucleus accumbens (basal ganglia)
+Found  97 samples in: Brain - Putamen (basal ganglia)
+Found  71 samples in: Brain - Spinal cord (cervical c-1)
+Found  63 samples in: Brain - Substantia nigra
+Found 214 samples in: Breast - Mammary Tissue
+Found 118 samples in: Cells - EBV-transformed lymphocytes
+Found 284 samples in: Cells - Transformed fibroblasts
+Found   6 samples in: Cervix - Ectocervix
+Found   5 samples in: Cervix - Endocervix
+Found 149 samples in: Colon - Sigmoid
+Found 196 samples in: Colon - Transverse
+Found 153 samples in: Esophagus - Gastroesophageal Junction
+Found 286 samples in: Esophagus - Mucosa
+Found 247 samples in: Esophagus - Muscularis
+Found   6 samples in: Fallopian Tube
+Found 194 samples in: Heart - Atrial Appendage
+Found 218 samples in: Heart - Left Ventricle
+Found  32 samples in: Kidney - Cortex
+Found 119 samples in: Liver
+Found 320 samples in: Lung
+Found  57 samples in: Minor Salivary Gland
+Found 430 samples in: Muscle - Skeletal
+Found 304 samples in: Nerve - Tibial
+Found  97 samples in: Ovary
+Found 171 samples in: Pancreas
+Found 103 samples in: Pituitary
+Found 106 samples in: Prostate
+Found 250 samples in: Skin - Not Sun Exposed (Suprapubic)
+Found 357 samples in: Skin - Sun Exposed (Lower leg)
+Found  88 samples in: Small Intestine - Terminal Ileum
+Found 104 samples in: Spleen
+Found 193 samples in: Stomach
+Found 172 samples in: Testis
+Found 323 samples in: Thyroid
+Found  83 samples in: Uterus
+Found  96 samples in: Vagina
+Found 393 samples in: Whole Blood

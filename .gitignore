@@ -1,0 +1,10 @@
+src/*.out
+data/output/correlations-output/*
+data/output/cytoscape-networks/*
+data/output/overlays/*
+data/output/pathway-analysis/*
+data/output/protein/*
+data/output/testing
+data/output/tissues-output/*
+data/input
+src/*.jar
