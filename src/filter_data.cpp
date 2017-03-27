@@ -179,7 +179,6 @@ int main(int argc, char* argv[]) {
     n.pathways = pathwayList;
     n.radiality = radiality;
     n.topologicalCoefficient = topologicalCoefficient;
-
     networkNodes.push_back(n);
   }
   printf("\r%s", "Loading edges...");
