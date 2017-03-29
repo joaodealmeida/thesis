@@ -25,12 +25,29 @@
 #./correlations.out "Colon - Transverse" ../data/input/mitocondrialGenes.list &
 #./correlations.out "Esophagus - Gastroesophageal Junction" ../data/input/mitocondrialGenes.list &
 #./correlations.out "Esophagus - Mucosa" ../data/input/mitocondrialGenes.list &
-./correlations.out "Esophagus - Muscularis" ../data/input/mitocondrialGenes.list &
-./correlations.out "Heart - Atrial Appendage" ../data/input/mitocondrialGenes.list &
-./correlations.out "Kidney - Cortex" ../data/input/mitocondrialGenes.list &
-./correlations.out "Liver" ../data/input/mitocondrialGenes.list &
-./correlations.out "Lung" ../data/input/mitocondrialGenes.list &
-./correlations.out "Minor Salivary Gland" ../data/input/mitocondrialGenes.list &
-./correlations.out "Muscle - Skeletal" ../data/input/mitocondrialGenes.list &
+#./correlations.out "Esophagus - Muscularis" ../data/input/mitocondrialGenes.list &
+#./correlations.out "Heart - Atrial Appendage" ../data/input/mitocondrialGenes.list &
+#./correlations.out "Heart - Left Ventricle" ../data/input/mitocondrialGenes.list &
+#./correlations.out "Kidney - Cortex" ../data/input/mitocondrialGenes.list &
+#./correlations.out "Liver" ../data/input/mitocondrialGenes.list &
+#./correlations.out "Lung" ../data/input/mitocondrialGenes.list &
+#./correlations.out "Minor Salivary Gland" ../data/input/mitocondrialGenes.list &
+#./correlations.out "Muscle - Skeletal" ../data/input/mitocondrialGenes.list &
+./correlations.out "Nerve - Tibial" ../data/input/mitocondrialGenes.list &
+./correlations.out "Ovary" ../data/input/mitocondrialGenes.list &
+./correlations.out "Pancreas" ../data/input/mitocondrialGenes.list &
+./correlations.out "Pituitary" ../data/input/mitocondrialGenes.list &
+./correlations.out "Prostate" ../data/input/mitocondrialGenes.list &
+./correlations.out "Skin - Not Sun Exposed (Suprapubic)" ../data/input/mitocondrialGenes.list &
+./correlations.out "Skin - Sun Exposed (Lower leg)" ../data/input/mitocondrialGenes.list &
+./correlations.out "Small Intestine - Terminal Ileum" ../data/input/mitocondrialGenes.list &
+./correlations.out "Spleen" ../data/input/mitocondrialGenes.list &
+./correlations.out "Stomach" ../data/input/mitocondrialGenes.list &
+./correlations.out "Testis" ../data/input/mitocondrialGenes.list &
+./correlations.out "Thyroid" ../data/input/mitocondrialGenes.list &
+./correlations.out "Uterus" ../data/input/mitocondrialGenes.list &
+./correlations.out "Vagina" ../data/input/mitocondrialGenes.list &
+./correlations.out "Whole Blood" ../data/input/mitocondrialGenes.list &
+
 wait
 echo "All tissues completed"

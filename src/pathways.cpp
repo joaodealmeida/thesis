@@ -86,6 +86,8 @@ int main(int argc, char* argv[]) {
   string tempGene;
   vector<string> mitocondrialGenes;
 
+  vector<string> visitedGenes;
+
   while (getline(mitocondrialGenesFileIn, tempGene))
     mitocondrialGenes.push_back(tempGene);
 
@@ -98,7 +100,11 @@ int main(int argc, char* argv[]) {
       const string& mitoGene = lineTk[0];
       const string& proteinGene = lineTk[1];
       const string& correlation = lineTk[2];
-      const string& pathway1 = getPathwayListForGene(pathwayToGene, mitoGene);
+      string pathway1 ="";
+      if( !isPresent(visitedGenes, mitoGene)){
+        pathway1 = getPathwayListForGene(pathwayToGene, mitoGene);
+        visitedGenes.push_back(mitoGene);
+      }
       const string& pathway2 = getPathwayListForGene(pathwayToGene, proteinGene);
 
       string isMito = "";
