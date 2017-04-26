@@ -20,6 +20,17 @@ struct Node {
   double numberOfDirectedEdges;
   double radiality;
   double topologicalCoefficient;
+
+  bool operator==(const Node& n) const
+  {
+      return (name == n.name);
+  }
+
+  bool operator<(const Node& n) const
+  {
+    return (name < n.name);
+  }
+
 };
 
 struct Edge
@@ -29,6 +40,23 @@ struct Edge
   string proteinGene;
 
 };
+
+struct equal_node
+{
+  inline bool operator() (const Node& node1, const Node& node2)
+  {
+    return (node1.name != node2.name);
+  }
+};
+
+struct order_by_name
+{
+  inline bool operator() (const Node& node1, const Node& node2)
+  {
+    return (node1.name < node2.name);
+  }
+};
+
 
 struct order_by_betweeness
 {
@@ -111,7 +139,7 @@ string getPathwayListForGene(const map<string, vector <string>>& pathwayToGene, 
  */
 
 int main(int argc, char* argv[]) {
-  if (argc < 3) {
+  if (argc < 2) {
 		cerr << "Error: Too few arguments. example ./filter_data \"Bladder\" 1 " << endl;
 		return 1;
 	}
@@ -233,96 +261,76 @@ int main(int argc, char* argv[]) {
    */
 
   ofstream networkEnrich;
-  networkEnrich.open("../data/output/pathway-analysis/"+ tissueName + ".txt");
+  networkEnrich.open("../data/output/camacho-ficheiros/"+ tissueName + ".txt");
 
-  /**
-   * HEADER
-   */
-   istringstream ss(argv[2]);
-   int x;
-   if (!(ss >> x))
-     cerr << "Invalid number " << argv[2] << '\n';
+  sort(networkNodes.begin(), networkNodes.end(), order_by_degree());
 
-  string medida = "";
-  if(x == 1){
-    medida = "betweenessCentrality";
-    sort(networkNodes.begin(), networkNodes.end(), order_by_betweeness());
-  }
-  else if(x == 2){
-    medida = "closenessCentrality";
-    sort(networkNodes.begin(), networkNodes.end(), order_by_closeness());
-  }
-  else if (x == 3) {
-    medida = "degree";
-    sort(networkNodes.begin(), networkNodes.end(), order_by_degree());
-  }
-  else if (x == 4){
-    medida = "numberOfDirectedEdges";
-    sort(networkNodes.begin(), networkNodes.end(), order_by_numberofedges());
-  }
-  else if (x == 5) {
-    medida = "radiality";
-    sort(networkNodes.begin(), networkNodes.end(), order_by_radiality());
-  }
-  else if (x == 6) {
-    medida = "topologicalCoefficient";
-    sort(networkNodes.begin(), networkNodes.end(), order_by_topological());
-  }
-
-  networkEnrich << tissueName << "\tbetweenessCentrality\tclosenessCentrality\tdegree\tnumberOfDirectedEdges\tradiality\ttopologicalCoeff\tGenesLigados\t";
-
-  for (auto& pathway : pathwayNodes){
-    string pathwayName = pathway.first;
-    networkEnrich << pathwayName << "\t";
-  }
-
-  networkEnrich << endl;
-
-  /**
-   * ROWS
-   */
-
-
-   int progress = 0;
    for (auto& node : networkNodes){
-    printf("\r%s ... %5.1f %%", tissueName.c_str(), (++progress) * 100.0 / networkNodes.size());
-    fflush(stdout);
-    networkEnrich << node.name << ((node.isMitocondrial) ? "(MITO)" : "") << "\t" << node.betweenessCentrality << "\t" << node.closenessCentrality << "\t" << node.degree << "\t" << node.numberOfDirectedEdges << "\t" << node.radiality << "\t" << node.topologicalCoefficient << "\t";
+     if(node.isMitocondrial){
 
-    for (auto& proteinGene : nodeInteractions[node.name]){
-      networkEnrich << proteinGene.name << ((proteinGene.isMitocondrial) ? "(MITO)" : "") << ",";
-    }
-    networkEnrich << "\t";
+       string neighboorGeneOnPathway = "";
+       vector<Node> genesWithPathway;
+       vector<Node> genesWithoutPathway;
+       vector<string> neighboorGenes;
 
-    /**
-     * Genes in each pathway
-     */
+       for (auto& pathway : pathwayNodes){
+         string pathwayName = pathway.first;
+         auto search = node.pathways.find(pathwayName);
+         genesWithPathway.push_back(node);
 
-     for (auto& pathway : pathwayNodes){
-       string pathwayName = pathway.first;
-       auto search = node.pathways.find(pathwayName);
+         if(search != node.pathways.end() ){
+           /**
+            *
+            * Gene is on a pathway, lets find the neighboor genes that share the same pathway
+            *
+            */
+            neighboorGeneOnPathway = "";
 
-       if(search != node.pathways.end()){
-         //networkEnrich << node.name;
-         string pathwaysChild = "";
-         for (auto& nodeChild : nodeInteractions[node.name]){
-           search = nodeChild.pathways.find(pathwayName);
-           if(search != nodeChild.pathways.end()){
-             pathwaysChild += nodeChild.name + ((nodeChild.isMitocondrial) ? "(MITO)" : "") + ",";
-           }
+            std::set<Node> nodeInteractionsSet(nodeInteractions[node.name].begin(), nodeInteractions[node.name].end());
+
+            for (auto& neighboorGene : nodeInteractionsSet){
+
+              if(neighboorGene.pathways.find(pathwayName) != neighboorGene.pathways.end()){
+                neighboorGeneOnPathway += neighboorGene.name + ",";
+                genesWithPathway.push_back(neighboorGene);
+              }
+            }
+
+            if(neighboorGeneOnPathway.size() > 0) {
+              neighboorGeneOnPathway.pop_back();
+              networkEnrich << node.name << "\t" << pathwayName << "\t" << neighboorGeneOnPathway << endl;
+            }
+
          }
-         pathwaysChild.pop_back();
-         networkEnrich << pathwaysChild;
 
        }
+       /**
+        *
+        *  Find genes that are neighbor but don't belong to any pathway
+        *
+        */
+        std::transform(std::begin(nodeInteractions[node.name]),
+                std::end(nodeInteractions[node.name]),
+                std::back_inserter(neighboorGenes),
+                [](Node d) { return d.name; }
+               );
 
-       else{
-         networkEnrich << ".";
+        std::set<Node> neighboorGenesNodeSet(nodeInteractions[node.name].begin(), nodeInteractions[node.name].end());
+        std::set<Node> genesWithPathwayNodeSet(genesWithPathway.begin(), genesWithPathway.end());
+
+        set_difference(neighboorGenesNodeSet.begin(), neighboorGenesNodeSet.end(), genesWithPathwayNodeSet.begin(), genesWithPathwayNodeSet.end(), back_inserter(genesWithoutPathway));
+
+       //networkEnrich << "SIZE: " << neighboorGenesNodeSet.size() << "PathG: " << genesWithPathwayNodeSet.size() << "No PathG: " << genesWithoutPathway.size() << "\t";
+       neighboorGeneOnPathway = "";
+       for (auto& gene : genesWithoutPathway) {
+         neighboorGeneOnPathway += gene.name + ",";
        }
-       networkEnrich << "\t";
-     }
 
-    networkEnrich << endl;
+       if(neighboorGeneOnPathway.size() > 0 ){
+         neighboorGeneOnPathway.pop_back();
+         networkEnrich << node.name << "\t" << "NONE" << "\t" << neighboorGeneOnPathway << endl;
+       }
+    }
   }
 
   if (!networkEnrich.is_open())

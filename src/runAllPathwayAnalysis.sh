@@ -4,7 +4,7 @@
 ./filter_data.out "Artery - Aorta" 3 &
 ./filter_data.out "Artery - Coronary" 3 &
 ./filter_data.out "Artery - Tibial" 3 &
-./filter_data.out "Bladder" 3 &
+#./filter_data.out "Bladder" 3 &
 ./filter_data.out "Brain - Amygdala" 3 &
 ./filter_data.out "Brain - Anterior cingulate cortex (BA24)" 3 &
 ./filter_data.out "Brain - Caudate (basal ganglia)" 3 &
