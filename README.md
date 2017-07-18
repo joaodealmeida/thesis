@@ -19,9 +19,7 @@ g++ prepend_tissue_name.cpp -o prepend_tissue_name.out -Wall -std=c++11
 
 ```
 ./parser.out gtex/rna-seq-data/All_Tissue_Site_Details_Analysis.combined.rpkm.gct gtex/annotations/GTEx_Data_V6_Annotations_SampleAttributesDS.txt
-sh runallCorrelactionsParallel.sh
-sh runallFilter.sh
-sh mergeOverlays.sh
+sh runAllCorrelactionsParallel.sh
 sh runAllEnrichment.sh
 
 Import each "-enriched" tissue to cytoscape. (Settings: Source Node | Target Node | Edge Attribute | Source Node Attribute (List of string) | Target Node Attribute (List of string)
