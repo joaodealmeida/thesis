@@ -26,6 +26,9 @@ sh runAllEnrichment.sh
 
 Import each "-enriched" tissue to cytoscape. (Settings: Source Node | Target Node | Edge Attribute | Source Node Attribute (List of string) | Target Node Attribute (List of string)
 
+![alt text](http://i.imgur.com/IOTRWTi.png)
+
+
 Go to Tools -> Network Analyzer -> Network Analysis -> Analyze Network -> Treat the network as undirected.
 (Wait)
 Export (default edge) to data/output/cytoscape-networks with the name tissuename-edges.csv
