@@ -34,8 +34,9 @@ Export (default node) to data/output/cytoscape-networks with the name tissuename
 
 Example of file names: Adipose - Visceral (Omentum)-edges.csv and Adipose - Visceral (Omentum)-nodes.csv
 
+When every tissue has its own -edges/nodes cytoscape files in the folder, run:
 sh makeDendograms.sh
 
-Use the tissueInfo.txt and the tree in newick format in the BioTree Viewer for better analysis.
+Use the /data/output/camacho-ficheiros/tissueInfo.txt and the tree in newick format (/data/output/camacho-ficheiros/trees) in the BioTree Viewer for better analysis.
 (https://joaoalmeida.me/dissertacao/viewer/)
 ```
