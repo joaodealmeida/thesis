@@ -20,7 +20,18 @@ struct Node {
   double numberOfDirectedEdges;
   double radiality;
   double topologicalCoefficient;
+
+  bool operator==(const Node& n) const
+  {
+      return (name == n.name);
+  }
+
+  bool operator<(const Node& n) const
+  {
+    return (name < n.name);
+  }
 };
+
 
 struct Edge
 {
@@ -78,8 +89,7 @@ struct order_by_topological
   }
 };
 
-//Example how to sort by operator
-//std::sort(vec.begin(), vec.end(), less_than_key());
+
 
 
 string getPathwayListForGene(const map<string, vector <string>>& pathwayToGene, const string& geneName) {
@@ -282,47 +292,51 @@ int main(int argc, char* argv[]) {
    * ROWS
    */
 
-
    int progress = 0;
    for (auto& node : networkNodes){
-    printf("\r%s ... %5.1f %%", tissueName.c_str(), (++progress) * 100.0 / networkNodes.size());
-    fflush(stdout);
-    networkEnrich << node.name << ((node.isMitocondrial) ? "(MITO)" : "") << "\t" << node.betweenessCentrality << "\t" << node.closenessCentrality << "\t" << node.degree << "\t" << node.numberOfDirectedEdges << "\t" << node.radiality << "\t" << node.topologicalCoefficient << "\t";
+     if(node.isMitocondrial){
+       printf("\r%s ... %5.1f %%", tissueName.c_str(), (++progress) * 100.0 / networkNodes.size());
+       fflush(stdout);
+       networkEnrich << node.name << ((node.isMitocondrial) ? "(MITO)" : "") << "\t" << node.betweenessCentrality << "\t" << node.closenessCentrality << "\t" << node.degree << "\t" << node.numberOfDirectedEdges << "\t" << node.radiality << "\t" << node.topologicalCoefficient << "\t";
 
-    for (auto& proteinGene : nodeInteractions[node.name]){
-      networkEnrich << proteinGene.name << ((proteinGene.isMitocondrial) ? "(MITO)" : "") << ",";
-    }
-    networkEnrich << "\t";
-
-    /**
-     * Genes in each pathway
-     */
-
-     for (auto& pathway : pathwayNodes){
-       string pathwayName = pathway.first;
-       auto search = node.pathways.find(pathwayName);
-
-       if(search != node.pathways.end()){
-         //networkEnrich << node.name;
-         string pathwaysChild = "";
-         for (auto& nodeChild : nodeInteractions[node.name]){
-           search = nodeChild.pathways.find(pathwayName);
-           if(search != nodeChild.pathways.end()){
-             pathwaysChild += nodeChild.name + ((nodeChild.isMitocondrial) ? "(MITO)" : "") + ",";
-           }
-         }
-         pathwaysChild.pop_back();
-         networkEnrich << pathwaysChild;
-
-       }
-
-       else{
-         networkEnrich << ".";
+       std::set<Node> nodeInteractionsSet(nodeInteractions[node.name].begin(), nodeInteractions[node.name].end());
+       for (auto& proteinGene : nodeInteractionsSet/*nodeInteractions[node.name]*/){
+         networkEnrich << proteinGene.name << ((proteinGene.isMitocondrial) ? "(MITO)" : "") << ",";
        }
        networkEnrich << "\t";
+
+       /**
+        * Genes in each pathway
+        */
+
+        for (auto& pathway : pathwayNodes){
+          string pathwayName = pathway.first;
+          auto search = node.pathways.find(pathwayName);
+
+          if(search != node.pathways.end()){
+            //networkEnrich << node.name;
+            string pathwaysChild = "";
+            std::set<Node> nodeInteractionsSet(nodeInteractions[node.name].begin(), nodeInteractions[node.name].end());
+            for (auto& nodeChild : nodeInteractionsSet/*nodeInteractions[node.name]*/){
+              search = nodeChild.pathways.find(pathwayName);
+              if(search != nodeChild.pathways.end()){
+                pathwaysChild += nodeChild.name + ((nodeChild.isMitocondrial) ? "(MITO)" : "") + ",";
+              }
+            }
+            pathwaysChild.pop_back();
+            networkEnrich << pathwaysChild;
+
+          }
+
+          else{
+            networkEnrich << ".";
+          }
+          networkEnrich << "\t";
+        }
+
+       networkEnrich << endl;
      }
 
-    networkEnrich << endl;
   }
 
   if (!networkEnrich.is_open())

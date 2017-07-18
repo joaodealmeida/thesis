@@ -66,6 +66,12 @@ vector <string> splitPathway(const string& str){
 	return tokens;
 }
 
+vector <string> splitDoubleComma(const string& str){
+	vector<string> tokens;
+	tokenize(str, tokens, ";");
+	return tokens;
+}
+
 
 bool isPresent(const vector<string>& v, const string& geneName){
 	return (std::find(v.begin(), v.end(), geneName) != v.end());

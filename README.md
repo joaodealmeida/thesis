@@ -6,9 +6,13 @@
 
 ```
 g++ parser.cpp -o parser.out -Wall -std=c++11
-g++ correlations.cpp -o correlations.out -Wall -std=c++11
-g++ pathways.cpp -o pathways.out -Wall -std=c++11
+g++ correlations_prot_filter.cpp -o correlations_prot_filter.out -Wall -std=c++11
+g++ count_pathways.cpp -o count_pathways.out -Wall -std=c++11
+g++ filter_camacho.cpp -o filter_camacho.out -Wall -std=c++11
 g++ filter_data.cpp -o filter_data.out -Wall -std=c++11
+g++ goterms.cpp -o goterms.out -Wall -std=c++11
+g++ pathways.cpp -o pathways.out -Wall -std=c++11
+g++ prepend_tissue_name.cpp -o prepend_tissue_name.out -Wall -std=c++11
 ```
 
 #### Run
@@ -19,5 +23,18 @@ sh runallCorrelactionsParallel.sh
 sh runallFilter.sh
 sh mergeOverlays.sh
 sh runAllEnrichment.sh
-./filter_data "TissueName" 1/2/3/4/5/6
+
+Import each "-enriched" tissue to cytoscape. (Settings: Source Node | Target Node | Edge Attribute | Source Node Attribute (List of string) | Target Node Attribute (List of string)
+
+Go to Tools -> Network Analyzer -> Network Analysis -> Analyze Network -> Treat the network as undirected.
+(Wait)
+Export (default edge) to data/output/cytoscape-networks with the name tissuename-edges.csv
+Export (default node) to data/output/cytoscape-networks with the name tissuename-nodes.csv
+
+Example of file names: Adipose - Visceral (Omentum)-edges.csv and Adipose - Visceral (Omentum)-nodes.csv
+
+sh makeDendograms.sh
+
+Use the tissueInfo.txt and the tree in newick format in the BioTree Viewer for better analysis.
+(https://joaoalmeida.me/dissertacao/viewer/)
 ```

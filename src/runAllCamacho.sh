@@ -4,7 +4,6 @@
 ./filter_camacho.out "Artery - Aorta" &
 ./filter_camacho.out "Artery - Coronary" &
 ./filter_camacho.out "Artery - Tibial" &
-./filter_camacho.out "Bladder" &
 ./filter_camacho.out "Brain - Amygdala" &
 ./filter_camacho.out "Brain - Anterior cingulate cortex (BA24)" &
 ./filter_camacho.out "Brain - Caudate (basal ganglia)" &
