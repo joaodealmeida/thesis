@@ -1,6 +1,6 @@
 # FEUP - Thesis
 
-## Identificação de grupos de co-expressão entre todos os genes de proteínas mitocondriais
+## Co-expression networks between protein encoding mitochondrial genes and all the remaining genes in human tissues
 
 #### Compile
 
@@ -46,5 +46,5 @@ sh makeDendograms.sh
 Use the /data/output/camacho-ficheiros/tissueInfo.txt and the tree in newick format (/data/output/camacho-ficheiros/trees) and import them into BioTree Viewer for better analysis.
 (https://joaoalmeida.me/dissertacao/viewer/) or https://github.com/joaodealmeida/biotreeviewer if you want to run it on your local server.
 
-If you have need help, contact me at contact at joaoalmeida dot me
+If you have need help, contact me: contact at joaoalmeida dot me.
 ```
