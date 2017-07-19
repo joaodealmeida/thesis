@@ -21,7 +21,8 @@ g++ prepend_tissue_name.cpp -o prepend_tissue_name.out -Wall -std=c++11
 ./parser.out gtex/rna-seq-data/All_Tissue_Site_Details_Analysis.combined.rpkm.gct gtex/annotations/GTEx_Data_V6_Annotations_SampleAttributesDS.txt
 sh runAllCorrelactionsParallel.sh
 sh runAllEnrichment.sh
-
+```
+```
 Import each "-enriched" tissue to cytoscape. (Settings: Source Node | Target Node | Edge Attribute | Source Node Attribute (List of string) | Target Node Attribute (List of string)
 
 HOW TO IMPORT ? - https://giphy.com/gifs/3ohz6wh5m4Huz5rkn6/fullscreen
@@ -39,7 +40,8 @@ Export (default node) to data/output/cytoscape-networks with the name tissuename
 HOW TO EXPORT THE NETWORK ? - https://giphy.com/gifs/3oAkalAYrlnx1Nffva
 
 Example of file names: Adipose - Visceral (Omentum)-edges.csv and Adipose - Visceral (Omentum)-nodes.csv
-
+```
+```
 When every tissue has its own -edges/nodes cytoscape files in the folder, run:
 sh makeDendograms.sh
 
